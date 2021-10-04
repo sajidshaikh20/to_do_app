@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/to_do_screens/mycard.dart';
 
 class Myhome extends StatefulWidget {
   const Myhome({Key? key}) : super(key: key);
@@ -8,11 +9,13 @@ class Myhome extends StatefulWidget {
 }
 
 class _MyhomeState extends State<Myhome> {
+  List<String> data = <String>['first ', 'second'];
+  TextEditingController editingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.cyanAccent,
         title: Text(
           "To Do App",
         ),
@@ -21,32 +24,33 @@ class _MyhomeState extends State<Myhome> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          TextField(),
+          TextField(
+            controller: editingController,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(onPressed: () {}, child: Text("save")),
+            child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    if (editingController.text.isNotEmpty) {
+                      data.add(editingController.text);
+                      editingController.clear();
+                    }
+                  });
+                },
+                child: Text("save")),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                Card(
-                  elevation: 2,
-                  child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child:
-                        Title(color: Colors.black, child: Text("sajid shaikh")),
-                  ),
-                ),
-              ],
+            child: ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) => Mycard(
+                todo: data[data.length - 1 - index],
+              ),
             ),
           ),
           Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ElevatedButton(onPressed: () {}, child: Text("Submit")),
-            ),
-          )
+              alignment: Alignment.center,
+              child: ElevatedButton(onPressed: () {}, child: Text("change")))
         ],
       ),
     );
