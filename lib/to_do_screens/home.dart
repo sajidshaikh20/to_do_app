@@ -42,17 +42,23 @@ class _MyhomeState extends State<Myhome> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) => Mycard(
-                todo: data[data.length - 1 - index],
-              ),
-            ),
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return Mycard(
+                    todo: data[data.length - 1 - index],
+                  );
+                }),
           ),
-          Align(
-              alignment: Alignment.center,
-              child: ElevatedButton(onPressed: () {}, child: Text("change")))
+          // Align(
+          //     alignment: Alignment.center,
+          //     child: ElevatedButton(onPressed: () {}, child: Text("change")))
         ],
       ),
     );
   }
 }
+// Card(
+      
+//       elevation: 3,
+//       child: Padding(padding: EdgeInsets.all(8), child: Text(todo)),
+//     )
